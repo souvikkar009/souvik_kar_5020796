@@ -9,5 +9,5 @@ import com.ems.entitites.Department;
 
 @Repository
 public interface DepartmentRepository extends JpaRepository<Department, Integer>{
-    
+    public Department findByName(String deptName);
 }
