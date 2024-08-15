@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -72,7 +73,7 @@ public class EmployeeController {
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<Page<Employee>> searchByName(@PathVariable("name") String nameFragment,
 			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "2") int size) {
-		Pageable pageable = PageRequest.of(page, size);
+		Pageable pageable = PageRequest.of(page, size, Sort.by("name").ascending());
 		return new ResponseEntity<>(employeeServices.searchEmployeeByName(nameFragment, pageable), HttpStatus.OK);
 	}
 

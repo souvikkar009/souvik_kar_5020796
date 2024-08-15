@@ -16,9 +16,9 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
 	public Employee findByEmail(String email);
 
-	@Query("SELECT e FROM Employees e WHERE e.name LIKE %?1%")
+	@Query(value =  "SELECT e FROM Employees e WHERE e.name LIKE %?1%", nativeQuery = true)
 	public Page<Employee> findByNameContaining(String nameFragment, Pageable pageable);
 
-	@Query("SELECT e FROM Employees e WHERE e.email LIKE %?1%")
+	@Query(value =  "SELECT e FROM Employees e WHERE e.email LIKE %?1%", nativeQuery = true)
 	public Page<Employee> findByEmailContaining(String emailFragment, Pageable pageable);
 }
