@@ -15,9 +15,10 @@ import java.util.List;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 	
-//	@Override
-//    @Lock(value = LockModeType.OPTIMISTIC)
-//    Optional<Customer> findById(Integer integer);
+	@SuppressWarnings("unchecked")
+	@Override
+    @Lock(value = LockModeType.OPTIMISTIC)
+    public Customer save(Customer customer);
 	
 	public Optional<Customer> findByEmail(String email);
 

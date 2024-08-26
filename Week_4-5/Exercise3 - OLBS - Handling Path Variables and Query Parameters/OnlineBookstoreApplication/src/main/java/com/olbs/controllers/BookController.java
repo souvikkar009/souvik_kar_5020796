@@ -52,7 +52,7 @@ public class BookController {
 		return new ResponseEntity<>(bookService.getBookById(id), HttpStatus.OK);
 	}
 
-	@PutMapping("/{id}")
+	@PutMapping("/{id}/update/price")
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<String> updateBookPrice(@PathVariable("id") Integer id, @RequestBody Integer price) {
 		return new ResponseEntity<String>(bookService.updateBookPrice(id, price), HttpStatus.OK);

@@ -13,6 +13,8 @@ import com.olbs.exceptions.BookException;
 import com.olbs.repositories.BookRepository;
 import com.olbs.services.BookService;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class BookServiceImplements implements BookService {
 
@@ -45,6 +47,7 @@ public class BookServiceImplements implements BookService {
 	}
 
 	@Override
+	@Transactional
 	public String updateBookPrice(Integer id, Integer price) throws BookException {
 		Optional<Book> book = bookRepository.findById(id);
 		if (book.isEmpty()) {

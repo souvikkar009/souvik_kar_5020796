@@ -1,14 +1,20 @@
 package com.olbs.entities;
 
+
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Version;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
@@ -44,12 +50,12 @@ public class Customer {
 	@NonNull
 	@Min(6)
 	private String password;
-
-	@OneToMany
-	private List<Order> orders;
 	
-//	@Version
-//	@Column(name = "version", nullable = false)
-//	private Integer version;
+	@Version
+	private Integer version;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(name = "customer_orders", joinColumns = @JoinColumn(name = "customer_id"), inverseJoinColumns = @JoinColumn(name = "order_id"))
+	private List<Order> orders;
 
 }
